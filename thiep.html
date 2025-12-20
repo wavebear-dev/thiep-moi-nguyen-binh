@@ -1,0 +1,440 @@
+<!doctype html>
+<html lang="vi">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>The Royal Wedding - Thành & Bình</title>
+    <script src="https://cdn.jsdelivr.net/npm/animejs@3.2.1/lib/anime.min.js"></script>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
+    />
+    <style>
+      @import url('https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@400;700&family=Pinyon+Script&family=Playfair+Display:ital,wght@0,400;0,900;1,400&display=swap');
+
+      :root {
+        --gold-gradient: linear-gradient(135deg, #d4af37 0%, #f7e1b5 50%, #d4af37 100%);
+        --royal-gold: #c9a96e;
+        --pure-white: #ffffff;
+        --soft-bg: #fdfaf5; /* Kem nhạt sang trọng hơn */
+        --text-dark: #4a3f35;
+      }
+
+      body {
+        margin: 0;
+        background-color: var(--soft-bg);
+        height: 1500vh;
+        overflow-x: hidden;
+        font-family: 'Playfair Display', serif;
+      }
+
+      .bg-layer {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: radial-gradient(circle at center, #ffffff 0%, #f5f0e8 100%);
+        z-index: -2;
+      }
+
+      .pattern-overlay {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-image: url('https://www.transparenttextures.com/patterns/cream-paper.png');
+        opacity: 0.4; /* Giảm opacity để tinh tế hơn */
+        z-index: -1;
+      }
+
+      .stage {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100vh;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        perspective: 2000px;
+      }
+
+      .invitation-container {
+        position: relative;
+        width: 460px; /* Tăng nhẹ để cân đối */
+        max-width: 90vw;
+        height: 680px;
+        transform-style: preserve-3d;
+        background: var(--pure-white);
+        border-radius: 20px;
+        box-shadow: 0 30px 80px rgba(0, 0, 0, 0.15);
+        overflow: hidden;
+      }
+
+      .door {
+        position: absolute;
+        width: 50%;
+        height: 100%;
+        background: var(--pure-white);
+        z-index: 1000;
+        border: none; /* Bỏ border cũ, dùng ornament thay thế */
+        box-shadow: 0 20px 50px rgba(0, 0, 0, 0.1);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        overflow: hidden;
+        backface-visibility: hidden;
+      }
+
+      .door-left {
+        left: 0;
+        transform-origin: left;
+        border-radius: 20px 0 0 20px;
+      }
+      .door-right {
+        right: 0;
+        transform-origin: right;
+        border-radius: 0 20px 20px 0;
+      }
+
+      /* Ornament viền vàng tinh tế cho cửa */
+      .door-ornament {
+        width: 90%;
+        height: 95%;
+        border: 3px double var(--royal-gold);
+        border-radius: 18px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background: rgba(255, 255, 255, 0.8);
+      }
+
+      .main-initials {
+        font-family: 'Cinzel Decorative', cursive;
+        font-size: 7rem; /* Tăng kích thước chữ cái đầu */
+        color: var(--royal-gold);
+        filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.15));
+      }
+
+      /* Shine effect mượt hơn */
+      .door::after {
+        content: '';
+        position: absolute;
+        top: -200%;
+        left: -100%;
+        width: 40%;
+        height: 400%;
+        background: linear-gradient(
+          to bottom right,
+          transparent,
+          rgba(255, 255, 255, 0.4),
+          transparent
+        );
+        transform: rotate(30deg);
+        animation: shine 8s infinite ease-in-out;
+      }
+
+      @keyframes shine {
+        0% {
+          transform: translateX(-200%) translateY(-200%) rotate(30deg);
+        }
+        50% {
+          transform: translateX(200%) translateY(200%) rotate(30deg);
+        }
+        100% {
+          transform: translateX(-200%) translateY(-200%) rotate(30deg);
+        }
+      }
+
+      .page {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: var(--pure-white);
+        padding: 60px 40px;
+        box-sizing: border-box;
+        text-align: center;
+        border-radius: 20px;
+        opacity: 0;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        box-shadow: inset 0 0 50px rgba(201, 169, 110, 0.05);
+        color: var(--text-dark);
+      }
+
+      /* Viền trang trí vàng tinh tế */
+      .page::before {
+        content: '';
+        position: absolute;
+        top: 30px;
+        left: 30px;
+        right: 30px;
+        bottom: 30px;
+        border: 2px solid rgba(201, 169, 110, 0.2);
+        border-radius: 15px;
+        pointer-events: none;
+      }
+
+      .wedding-title {
+        font-size: 0.9rem;
+        letter-spacing: 8px;
+        color: var(--royal-gold);
+        font-weight: 600;
+        margin-bottom: 20px;
+      }
+
+      .hero-names {
+        font-family: 'Cinzel Decorative', serif;
+        font-size: 2rem;
+        margin: 20px 0;
+        color: var(--text-dark);
+        letter-spacing: 3px;
+      }
+
+      h2 {
+        font-family: 'Pinyon Script', cursive;
+        font-size: 4.5rem;
+        color: var(--royal-gold);
+        margin: 20px 0;
+      }
+
+      .photo-frame {
+        position: relative;
+        width: 100%;
+        max-width: 360px;
+        height: 400px;
+        margin: 30px auto;
+        border: 10px solid var(--pure-white);
+        border-radius: 10px;
+        box-shadow: 0 15px 40px rgba(0, 0, 0, 0.1);
+        overflow: hidden;
+      }
+
+      .photo-frame img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        filter: sepia(0.1) brightness(1.05);
+      }
+
+      .luxury-date {
+        font-size: 3.5rem;
+        font-weight: 900;
+        color: var(--royal-gold);
+        font-family: 'Playfair Display';
+        padding: 10px 30px;
+        margin: 30px 0;
+        border-top: 2px solid var(--royal-gold);
+        border-bottom: 2px solid var(--royal-gold);
+        display: inline-block;
+      }
+
+      .btn-luxury {
+        background: var(--royal-gold);
+        color: var(--pure-white);
+        padding: 15px 40px;
+        border-radius: 30px;
+        font-size: 0.9rem;
+        letter-spacing: 3px;
+        box-shadow: 0 8px 20px rgba(201, 169, 110, 0.3);
+        transition: transform 0.3s;
+      }
+
+      .btn-luxury:hover {
+        transform: translateY(-3px);
+      }
+
+      .scroll-indicator {
+        position: fixed;
+        bottom: 40px;
+        width: 100%;
+        text-align: center;
+        color: var(--royal-gold);
+        font-family: 'Playfair Display';
+        letter-spacing: 5px;
+        font-size: 0.8rem;
+        opacity: 0.8;
+        z-index: 100;
+      }
+
+      .sparkle {
+        position: fixed;
+        width: 6px;
+        height: 6px;
+        background: var(--royal-gold);
+        border-radius: 50%;
+        pointer-events: none;
+        z-index: 5;
+        opacity: 0.6;
+        box-shadow: 0 0 10px #fff;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="bg-layer"></div>
+    <div class="pattern-overlay"></div>
+
+    <div class="stage">
+      <div class="invitation-container">
+        <div class="door door-left">
+          <div class="door-ornament"><div class="main-initials">T</div></div>
+        </div>
+        <div class="door door-right">
+          <div class="door-ornament"><div class="main-initials">B</div></div>
+        </div>
+
+        <!-- Các page giữ nguyên nội dung, chỉ tinh chỉnh giao diện -->
+        <div class="page" id="p1">
+          <div class="wedding-title">TRÂN TRỌNG KÍNH MỜI QUÝ VỊ</div>
+          <div class="hero-names">DƯƠNG TẤT THÀNH</div>
+          <h2 style="font-size: 3rem; margin: 10px 0">&</h2>
+          <div class="hero-names">NGUYỄN THỊ THANH BÌNH</div>
+          <p style="font-size: 1rem; opacity: 0.85; line-height: 1.8; margin-top: 30px">
+            Cùng gia đình hai bên nội ngoại trân trọng kính mời quý vị đến dự lễ cưới của chúng tôi
+          </p>
+        </div>
+
+        <div class="page" id="p2">
+          <h2>Khoảnh khắc</h2>
+          <div class="photo-frame">
+            <img
+              src="https://images.pexels.com/photos/1444442/pexels-photo-1444442.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
+              alt="Portrait"
+            />
+          </div>
+          <p
+            style="
+              font-family: 'Pinyon Script';
+              font-size: 2.2rem;
+              color: var(--royal-gold);
+              margin-top: 20px;
+            "
+          >
+            Hạnh phúc bên nhau
+          </p>
+        </div>
+
+        <div class="page" id="p3">
+          <div class="wedding-title">LỄ ĐÍNH HÔN</div>
+          <div class="luxury-date">09 . 11 . 2025</div>
+          <p style="letter-spacing: 5px; font-weight: bold; font-size: 1.1rem">CHỦ NHẬT</p>
+          <p style="font-size: 0.9rem; color: #888; margin: 15px 0">(Tức ngày 20/09 năm Ất Tỵ)</p>
+          <p style="margin-top: 30px; line-height: 1.8">
+            <i class="fas fa-map-marker-alt" style="color: var(--royal-gold); font-size: 1.5rem"></i
+            ><br />
+            Xóm Thượng, Nộn Khê, Yên Từ,<br />Yên Mô, Ninh Bình
+          </p>
+        </div>
+
+        <div class="page" id="p4">
+          <div class="wedding-title">LỄ THÀNH HÔN</div>
+          <div class="luxury-date">10 . 11 . 2025</div>
+          <p style="letter-spacing: 5px; font-weight: bold; font-size: 1.1rem">THỨ HAI</p>
+          <p style="font-size: 0.9rem; color: #888; margin: 15px 0">(Tức ngày 21/09 năm Ất Tỵ)</p>
+          <p style="margin: 30px 0">TẠI YÊN LÂM, YÊN MÔ, NINH BÌNH</p>
+          <a href="#" class="btn-luxury">CHỈ ĐƯỜNG</a>
+        </div>
+
+        <div class="page" id="p5">
+          <h2>Mừng Hạnh Phúc</h2>
+          <div
+            style="
+              padding: 20px;
+              background: #fff;
+              display: inline-block;
+              border-radius: 15px;
+              box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            "
+          >
+            <img
+              src="https://api.qrserver.com/v1/create-qr-code/?size=180x180&data=HappyWedding"
+              alt="QR"
+            />
+          </div>
+          <p style="font-weight: bold; margin: 25px 0 10px; color: var(--text-dark)">
+            MB BANK - NGÂN HÀNG QUÂN ĐỘI
+          </p>
+          <p
+            style="
+              color: var(--royal-gold);
+              font-size: 1.8rem;
+              font-weight: 900;
+              letter-spacing: 3px;
+            "
+          >
+            0911 2025 8888
+          </p>
+          <p style="font-size: 0.9rem">CHỦ TK: DƯƠNG TẤT THÀNH</p>
+        </div>
+
+        <div class="page" id="p6">
+          <h2 style="font-size: 5.5rem">Thank You</h2>
+          <p style="font-size: 1.2rem; letter-spacing: 4px; color: var(--royal-gold)">
+            TRÂN TRỌNG CẢM ƠN!
+          </p>
+          <div
+            style="height: 2px; width: 80px; background: var(--royal-gold); margin: 40px auto"
+          ></div>
+          <div class="hero-names" style="font-size: 1.8rem">THÀNH & BÌNH</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="scroll-indicator">
+      VUỐT ĐỂ KHÁM PHÁ <br />
+      <i class="fas fa-chevron-down" style="animation: bounce 2s infinite"></i>
+    </div>
+
+    <!-- Script giữ nguyên 100% hiệu ứng cũ -->
+    <script>
+      const tl = anime.timeline({ autoplay: false, easing: 'linear' });
+
+      tl.add({ targets: '.door-left', rotateY: -125, duration: 1000 })
+        .add({ targets: '.door-right', rotateY: 125, duration: 1000 }, '-=1000')
+        .add({ targets: '#p1', opacity: [0, 1], scale: [0.9, 1], duration: 800 })
+        .add({ targets: '#p1', opacity: 0, translateY: -20, duration: 600 }, '+=800')
+        .add({ targets: '#p2', opacity: [0, 1], duration: 800 })
+        .add({ targets: '#p2', opacity: 0, scale: 1.1, duration: 600 }, '+=800')
+        .add({ targets: '#p3', opacity: [0, 1], translateX: [30, 0], duration: 800 })
+        .add({ targets: '#p3', opacity: 0, translateX: -30, duration: 600 }, '+=800')
+        .add({ targets: '#p4', opacity: [0, 1], translateY: [30, 0], duration: 800 })
+        .add({ targets: '#p4', opacity: 0, translateY: 30, duration: 600 }, '+=800')
+        .add({ targets: '#p5', opacity: [0, 1], scale: [0.8, 1], duration: 800 })
+        .add({ targets: '#p5', opacity: 0, filter: 'blur(10px)', duration: 600 }, '+=800')
+        .add({ targets: '#p6', opacity: [0, 1], duration: 800 })
+        .add({ targets: '.door-left', rotateY: 0, duration: 1000 }, '+=1200')
+        .add({ targets: '.door-right', rotateY: 0, duration: 1000 }, '-=1000');
+
+      window.addEventListener('scroll', () => {
+        const scrollPercent = window.scrollY / (document.body.offsetHeight - window.innerHeight);
+        tl.seek(scrollPercent * tl.duration);
+      });
+
+      // Hạt vàng tinh tế hơn
+      function createSparkle() {
+        const s = document.createElement('div');
+        s.className = 'sparkle';
+        s.style.left = Math.random() * 100 + 'vw';
+        s.style.top = Math.random() * 100 + 'vh';
+        document.body.appendChild(s);
+        anime({
+          targets: s,
+          opacity: [0, 0.7, 0],
+          scale: [0, 2],
+          duration: 4000 + Math.random() * 4000,
+          easing: 'easeInOutSine',
+          complete: () => {
+            s.remove();
+            createSparkle();
+          },
+        });
+      }
+      for (let i = 0; i < 25; i++) setTimeout(createSparkle, i * 200);
+    </script>
+  </body>
+</html>
