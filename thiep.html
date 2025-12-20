@@ -205,9 +205,9 @@
 
       .photo-frame {
         position: relative;
-        width: 100%;
+        width: 90%;
         max-width: 360px;
-        height: 400px;
+        height: 500px;
         margin: 30px auto;
         border: 10px solid var(--pure-white);
         border-radius: 10px;
@@ -219,6 +219,7 @@
         width: 100%;
         height: 100%;
         object-fit: cover;
+        object-position: center top;
         filter: sepia(0.1) brightness(1.05);
       }
 
@@ -300,12 +301,9 @@
         </div>
 
         <div class="page" id="p2">
-          <h2>Khoảnh khắc</h2>
+          <h2 style="font-size: 3rem">Khoảnh khắc</h2>
           <div class="photo-frame">
-            <img
-              src="https://images.pexels.com/photos/1444442/pexels-photo-1444442.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
-              alt="Portrait"
-            />
+            <img src="./img.jpg" alt="Portrait" />
           </div>
           <p
             style="
@@ -320,35 +318,55 @@
         </div>
 
         <div class="page" id="p3">
-          <div class="wedding-title">LỄ ĐÍNH HÔN</div>
-          <div class="luxury-date">09 . 11 . 2025</div>
-          <p style="letter-spacing: 5px; font-weight: bold; font-size: 1.1rem">CHỦ NHẬT</p>
-          <p style="font-size: 0.9rem; color: #888; margin: 15px 0">(Tức ngày 20/09 năm Ất Tỵ)</p>
-          <p style="margin-top: 30px; line-height: 1.8">
-            <i class="fas fa-map-marker-alt" style="color: var(--royal-gold); font-size: 1.5rem"></i
-            ><br />
-            Xóm Thượng, Nộn Khê, Yên Từ,<br />Yên Mô, Ninh Bình
-          </p>
+          <div class="wedding-title">LỄ ĂN HỎI</div>
+          <div class="luxury-date">07 . 02 . 2026</div>
+          <p style="letter-spacing: 5px; font-weight: bold; font-size: 1.1rem">THỨ BẢY</p>
+          <p style="font-size: 0.9rem; color: #888; margin: 15px 0">(Tức ngày 20/12 năm Ất Tỵ)</p>
+          <a
+            href="https://maps.app.goo.gl/UiLtM9h5bQ1RdJSGA"
+            style="
+              color: var(--text-dark);
+              margin: 30px 0;
+              display: inline-block;
+              text-decoration: none;
+            "
+          >
+            Đông Thôn, xã Đồng Thái, <br />
+            tỉnh Ninh Bình
+          </a>
         </div>
 
         <div class="page" id="p4">
           <div class="wedding-title">LỄ THÀNH HÔN</div>
-          <div class="luxury-date">10 . 11 . 2025</div>
-          <p style="letter-spacing: 5px; font-weight: bold; font-size: 1.1rem">THỨ HAI</p>
-          <p style="font-size: 0.9rem; color: #888; margin: 15px 0">(Tức ngày 21/09 năm Ất Tỵ)</p>
-          <p style="margin: 30px 0">TẠI YÊN LÂM, YÊN MÔ, NINH BÌNH</p>
-          <a href="#" class="btn-luxury">CHỈ ĐƯỜNG</a>
+          <div class="luxury-date">08 . 02 . 2026</div>
+          <p style="letter-spacing: 5px; font-weight: bold; font-size: 1.1rem">CHỦ NHẬT</p>
+          <p style="font-size: 0.9rem; color: #888; margin: 15px 0">(Tức ngày 21/12 năm Ất Tỵ)</p>
+          <a
+            href="https://maps.app.goo.gl/UiLtM9h5bQ1RdJSGA"
+            style="
+              color: var(--text-dark);
+              margin: 30px 0;
+              display: inline-block;
+              text-decoration: none;
+            "
+          >
+            Đông Thôn, xã Đồng Thái, <br />
+            tỉnh Ninh Bình
+          </a>
         </div>
 
         <div class="page" id="p5">
-          <h2>Mừng Hạnh Phúc</h2>
+          <h2 style="font-size: 36px">Mừng Hạnh Phúc</h2>
           <div
             style="
-              padding: 20px;
+              margin-top: 50px;
+              padding: 5px;
               background: #fff;
               display: inline-block;
               border-radius: 15px;
               box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+              width: fit-content;
+              margin: 0 auto;
             "
           >
             <img
@@ -356,20 +374,29 @@
               alt="QR"
             />
           </div>
-          <p style="font-weight: bold; margin: 25px 0 10px; color: var(--text-dark)">
-            MB BANK - NGÂN HÀNG QUÂN ĐỘI
-          </p>
-          <p
-            style="
-              color: var(--royal-gold);
-              font-size: 1.8rem;
-              font-weight: 900;
-              letter-spacing: 3px;
-            "
-          >
-            0911 2025 8888
-          </p>
-          <p style="font-size: 0.9rem">CHỦ TK: DƯƠNG TẤT THÀNH</p>
+          <div>
+            <p
+              style="
+                margin-top: 50px;
+                font-weight: bold;
+                color: var(--text-dark);
+                font-size: 0.7rem;
+              "
+            >
+              MB BANK - NGÂN HÀNG QUÂN ĐỘI
+            </p>
+            <p
+              style="
+                color: var(--royal-gold);
+                font-size: 1.4rem;
+                font-weight: 900;
+                letter-spacing: 3px;
+              "
+            >
+              0911 2025 8888
+            </p>
+            <p style="font-size: 0.9rem">CHỦ TK: NGUYỄN THỊ THANH BÌNH</p>
+          </div>
         </div>
 
         <div class="page" id="p6">
@@ -380,7 +407,6 @@
           <div
             style="height: 2px; width: 80px; background: var(--royal-gold); margin: 40px auto"
           ></div>
-          <div class="hero-names" style="font-size: 1.8rem">THÀNH & BÌNH</div>
         </div>
       </div>
     </div>
