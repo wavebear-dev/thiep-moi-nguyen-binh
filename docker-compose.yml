@@ -1,0 +1,24 @@
+version: '3.8'
+
+services:
+  mysql:
+    image: mysql:8.0
+    container_name: thiepcuoi_mysql
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: thiepcuoi
+      MYSQL_USER: wavebear2010
+      MYSQL_PASSWORD: 123456
+    ports:
+      - "3306:3306"
+    volumes:
+      - mysql_data:/var/lib/mysql
+    networks:
+      - thiepcuoi_network
+
+volumes:
+  mysql_data:
+
+networks:
+  thiepcuoi_network:
+    driver: bridge
