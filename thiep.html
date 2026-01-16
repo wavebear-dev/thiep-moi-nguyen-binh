@@ -1094,7 +1094,7 @@
                   <div class="elementor-heading-title elementor-size-default">TRÂN TRỌNG KÍNH MỜI</div>
                 </div>
               </div>
-              <p id="nameUser" style="font-size: 20px; margin: 0; font-family: 'Courier New', Courier, monospace;">Bạn: Nguyễn Tình</p>
+              <p id="nameUser" style="font-size: 20px; margin: 0; font-family: 'Courier New', Courier, monospace;"></p>
               <div
               class="elementor-element elementor-element-442554d1 animated-slow elementor-invisible elementor-widget elementor-widget-heading"
               data-id="442554d1"
@@ -1690,6 +1690,16 @@
         </div>
       </div>
     </div>
+      <script>
+      // Render ra tên khách mời dựa vào query parameter "name"
+      const urlParams = new URLSearchParams(window.location.search);
+      const nameUser = urlParams.get('name');
+      if (nameUser){
+      document.querySelector('#nameUser').innerText = decodeURIComponent(nameUser).replace(/\+/g, ' ');
+      }else{
+        document.querySelector('#nameUser').style.display = 'none';
+      }
+    </script>
     <script type="speculationrules">
       {
         "prefetch": [
@@ -1948,15 +1958,6 @@
       src="https://jejuwedding.vn/thiep-cuoi/wp-content/plugins/pro-elements/assets/js/elements-handlers.min.js?ver=3.30.0"
       id="pro-elements-handlers-js"
     ></script>
-    <script>
-      // Render ra tên khách mời dựa vào query parameter "name"
-      const urlParams = new URLSearchParams(window.location.search);
-      const nameUser = urlParams.get('name');
-      if (nameUser){
-      document.querySelector('#nameUser').innerText = decodeURIComponent(nameUser).replace(/\+/g, ' ');
-      }else{
-        document.querySelector('#nameUser').style.display = 'none';
-      }
-    </script>
+  
   </body>
 </html>
